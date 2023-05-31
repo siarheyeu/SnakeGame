@@ -38,4 +38,25 @@ public class SnakeGame extends Game {
         snake.move();
         drawScene();
     }
+
+    public com.javarush.games.snake.GameObject createNewHead(){
+        com.javarush.games.snake.GameObject oldHead = snakeParts.get(0);
+        if(direction == Direction.LEFT){
+            return new com.javarush.games.snake.GameObject(oldHead.x - 1, oldHead.y);
+        } else if (direction == com.javarush.games.snake.Direction.RIGHT){
+            return new com.javarush.games.snake.GameObject(oldHead.x + 1, oldHead.y);
+        } else if (direction == com.javarush.games.snake.Direction.UP){
+            return new com.javarush.games.snake.GameObject(oldHead.x, oldHead.y - 1);
+        } else {
+            return new com.javarush.games.snake.GameObject(oldHead.x, oldHead.y + 1);
+        }
+    }
+
+    public void removeTail(){
+        snakeParts.remove(snakeParts.size() - 1);
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 }
