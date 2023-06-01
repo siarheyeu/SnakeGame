@@ -36,8 +36,36 @@ public class Snake {
     }
 
     public void move(){
+        com.javarush.games.snake.GameObject newHead = createNewHead();
+        if(newHead.x >= com.javarush.games.snake.SnakeGame.WIDTH
+        || newHead.x < 0
+        || newHead.y >= com.javarush.games.snake.SnakeGame.HEIGHT
+        || newHead.y < 0){
+            isAlive = false;
+            return;
         }
-    public void setDirection(Direction direction) {
+        
+        snakeParts.add(0, newHead);
+        removeTail();
+        }
+        
+        public com.javarush.games.snake.GameObject createNewHead() {
+            com.javarush.games.snake.GameObject oldHead = snakeParts.get(0);
+            if (direction == com.javarush.games.snake.Direction.LEFT){
+                return new com.javarush.games.snake.GameObject(oldHead.x - 1, oldHead.y);
+            } else if (direction == com.javarush.games.snake.Direction.RIGHT) {
+                return new com.javarush.games.snake.GameObject(oldHead.x + 1, oldHead.y);
+            } else if (direction == com.javarush.games.snake.Direction.UP) {
+                return new com.javarush.games.snake.GameObject(oldHead.x, oldHead.y - 1);
+            } else {
+                return new com.javarush.games.snake.GameObject(oldHead.x, oldHead.y + 1);
+            }
+        }
+
+        public void removeTail() {
+        snakeParts.remove(snakeParts.size() - 1);
+        }
+    public void setDirection(com.javarush.games.snake.Direction direction) {
         this.direction = direction;
     }
 }

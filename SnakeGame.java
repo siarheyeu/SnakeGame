@@ -27,7 +27,7 @@ public class SnakeGame extends Game {
     private void drawScene(){
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                setCellColor(i, j, Color.DARKSEAGREEN);
+                setCellValueEx(i, j, Color.DARKSEAGREEN, "");
             }
         }
         snake.draw(this);
@@ -37,26 +37,5 @@ public class SnakeGame extends Game {
     public void onTurn(int step) {
         snake.move();
         drawScene();
-    }
-
-    public com.javarush.games.snake.GameObject createNewHead(){
-        com.javarush.games.snake.GameObject oldHead = snakeParts.get(0);
-        if(direction == Direction.LEFT){
-            return new com.javarush.games.snake.GameObject(oldHead.x - 1, oldHead.y);
-        } else if (direction == com.javarush.games.snake.Direction.RIGHT){
-            return new com.javarush.games.snake.GameObject(oldHead.x + 1, oldHead.y);
-        } else if (direction == com.javarush.games.snake.Direction.UP){
-            return new com.javarush.games.snake.GameObject(oldHead.x, oldHead.y - 1);
-        } else {
-            return new com.javarush.games.snake.GameObject(oldHead.x, oldHead.y + 1);
-        }
-    }
-
-    public void removeTail(){
-        snakeParts.remove(snakeParts.size() - 1);
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 }
