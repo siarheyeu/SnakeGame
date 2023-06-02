@@ -66,6 +66,16 @@ public class Snake {
         snakeParts.remove(snakeParts.size() - 1);
         }
     public void setDirection(com.javarush.games.snake.Direction direction) {
+        if (direction == Direction.UP && this.direction == Direction.DOWN) {
+            return;
+        } else if (direction == Direction.LEFT && this.direction == Direction.RIGHT) {
+            return;
+        } else if (direction == Direction.RIGHT && this.direction == Direction.LEFT) {
+            return;
+        } else if (direction == Direction.DOWN && this.direction == Direction.UP) {
+            return;
+        }
+
         this.direction = direction;
     }
 }
