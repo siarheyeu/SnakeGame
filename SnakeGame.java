@@ -23,8 +23,8 @@ public class SnakeGame extends Game {
         turnDelay = 300;
         setTurnTimer(turnDelay);
         snake = new com.javarush.games.snake.Snake(WIDTH/2, HEIGHT/2);
-        apple = new com.javarush.games.snake.Apple(5,5);
-       drawScene();
+        createNewApple();
+        drawScene();
        }
 
     private void drawScene(){
@@ -37,9 +37,21 @@ public class SnakeGame extends Game {
         apple.draw(this);
     }
 
+
+    private void createNewApple() {
+        Apple newApple;
+        int x = getRandomNumber(WIDTH);
+        int y = getRandomNumber(HEIGHT);
+        newApple = new com.javarush.games.snake.Apple(x, y);
+        apple = newApple;
+    }
+
     @Override
     public void onTurn(int step) {
         snake.move(apple);
+        if (!apple.isAlive){
+            createNewApple();
+        }
         drawScene();
     }
 
