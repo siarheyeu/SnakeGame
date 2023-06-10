@@ -30,29 +30,38 @@ public class Snake {
 
         for (int i = 0; i < snakeParts.size(); i++) {
             com.javarush.games.snake.GameObject part = snakeParts.get(i);
-            String sign = (i != 0) ? BODY_SIGN : HEAD_SIGN;
-            game.setCellValueEx(part.x, part.y, Color.NONE, sign, color, 75);
+            if (i==0){
+                game.setCellValueEx(part.x, part.y, Color.NONE, HEAD_SIGN, color, 75);
+            } else {
+                game.setCellValueEx(part.x, part.y, Color.NONE, sign, BODY_SIGN, 75);
+            }
         }
     }
 
-    public void move(Apple apple){
+    public void move(Apple apple) {
         com.javarush.games.snake.GameObject newHead = createNewHead();
-        if(newHead.x >= com.javarush.games.snake.SnakeGame.WIDTH
-        || newHead.x < 0
-        || newHead.y >= com.javarush.games.snake.SnakeGame.HEIGHT
-        || newHead.y < 0){
+        if (newHead.x >= com.javarush.games.snake.SnakeGame.WIDTH
+                || newHead.x < 0
+                || newHead.y >= com.javarush.games.snake.SnakeGame.HEIGHT
+                || newHead.y < 0) {
             isAlive = false;
             return;
         }
-        
+
+        if (checkCollision(newHead)) {
+            isAlive = false;
+            return;
+        }
+
         snakeParts.add(0, newHead);
 
-        if (newHead.x == apple.x && newHead.y = apple.y) {
+        if (newHead.x == apple.x && newHead.y == apple.y) {
             apple.isAlive = false;
         } else {
             removeTail();
         }
     }
+
         
         public com.javarush.games.snake.GameObject createNewHead() {
             com.javarush.games.snake.GameObject oldHead = snakeParts.get(0);
@@ -82,5 +91,14 @@ public class Snake {
         }
 
         this.direction = direction;
+    }
+
+    public boolean checkCollision(com.javarush.games.snake.GameObject gameObject) {
+        for (com.javarush.games.snake.GameObject : snakeParts) {
+            if (part.x == gameObject.x && part.y == gameObject.y){
+                return true;
+            }
+        }
+        return false;
     }
 }
