@@ -9,6 +9,8 @@ public class SnakeGame extends Game {
 
     private Snake snake;
 
+    private Apple apple;
+
     private int turnDelay;
 
     @Override
@@ -21,6 +23,7 @@ public class SnakeGame extends Game {
         turnDelay = 300;
         setTurnTimer(turnDelay);
         snake = new com.javarush.games.snake.Snake(WIDTH/2, HEIGHT/2);
+        apple = new com.javarush.games.snake.Apple(5,5);
        drawScene();
        }
 
@@ -31,11 +34,12 @@ public class SnakeGame extends Game {
             }
         }
         snake.draw(this);
+        apple.draw(this);
     }
 
     @Override
     public void onTurn(int step) {
-        snake.move();
+        snake.move(apple);
         drawScene();
     }
 

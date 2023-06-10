@@ -35,7 +35,7 @@ public class Snake {
         }
     }
 
-    public void move(){
+    public void move(Apple apple){
         com.javarush.games.snake.GameObject newHead = createNewHead();
         if(newHead.x >= com.javarush.games.snake.SnakeGame.WIDTH
         || newHead.x < 0
@@ -46,8 +46,13 @@ public class Snake {
         }
         
         snakeParts.add(0, newHead);
-        removeTail();
+
+        if (newHead.x == apple.x && newHead.y = apple.y) {
+            apple.isAlive = false;
+        } else {
+            removeTail();
         }
+    }
         
         public com.javarush.games.snake.GameObject createNewHead() {
             com.javarush.games.snake.GameObject oldHead = snakeParts.get(0);
