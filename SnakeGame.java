@@ -12,6 +12,7 @@ public class SnakeGame extends Game {
     private Apple apple;
 
     private int turnDelay;
+    private boolean isGameStopped;
 
     @Override
     public void initialize() {
@@ -24,6 +25,7 @@ public class SnakeGame extends Game {
         setTurnTimer(turnDelay);
         snake = new com.javarush.games.snake.Snake(WIDTH/2, HEIGHT/2);
         createNewApple();
+        isGameStopped = false;
         drawScene();
        }
 
