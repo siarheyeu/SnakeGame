@@ -40,6 +40,15 @@ public class SnakeGame extends Game {
         apple.draw(this);
     }
 
+    private void createNewApple() {
+        Apple newApple;
+        do {
+            int x = getRandomNumber(WIDTH);
+            int y = getRandomNumber(HEIGHT);
+            newApple = new Apple(x, y);
+        } while (snake.checkCollision(newApple));
+        apple = newApple;
+    }
 
     private void createNewApple() {
         Apple newApple;
@@ -57,6 +66,9 @@ public class SnakeGame extends Game {
         }
         if(!snake.isAlive){
             gameOver();
+        }
+        if (snake.getLength() > GOAL) {
+            win();
         }
         drawScene();
     }
@@ -80,5 +92,9 @@ public class SnakeGame extends Game {
         showMessageDialog(Color.NONE, "Game over!", Color.RED, 50);
     }
 
-
+    private void win(){
+        stopTurnTimer();
+        isGameStopped = true;
+        showMessageDialog(Color.NONE, "You win!", Color.GREEN, 50);
+    }
 }
