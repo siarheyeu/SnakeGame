@@ -75,6 +75,10 @@ public class SnakeGame extends Game {
 
     @Override
     public void onKeyPress(Key key){
+        if (key == Key.SPACE && isGameStopped) {
+            createGame();
+        }
+
         if (key == Key.LEFT){
             snake.setDirection(Direction.LEFT);
         } else if (key == Key.RIGHT){
