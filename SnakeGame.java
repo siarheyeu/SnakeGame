@@ -12,6 +12,8 @@ public class SnakeGame extends Game {
     private Apple apple;
 
     private int turnDelay;
+
+    private int score;
     private boolean isGameStopped;
     private static final int GOAL = 28;
 
@@ -22,13 +24,15 @@ public class SnakeGame extends Game {
     }
 
     private void createGame(){
-        turnDelay = 300;
-        setTurnTimer(turnDelay);
         snake = new com.javarush.games.snake.Snake(WIDTH/2, HEIGHT/2);
         createNewApple();
         isGameStopped = false;
         drawScene();
-       }
+        turnDelay = 300;
+        setTurnTimer(turnDelay);
+        score = 0;
+        setScore(score);
+        }
 
     private void drawScene(){
         for (int i = 0; i < WIDTH; i++) {
